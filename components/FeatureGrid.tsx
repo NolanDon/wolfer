@@ -18,7 +18,7 @@ export default function FeatureGrid() {
     <section id="features" className="mx-auto max-w-6xl px-4 py-16">
       <h2 className="text-3xl md:text-4xl font-semibold">MVP features at launch</h2>
       <p className="text-sub mt-2 max-w-2xl">
-        Laser-focused features that ship day one — enough to validate the “live agents that construct your startup” thesis.
+        Laser-focused features that ship day one, enough to validate the “live agents that construct your startup” thesis.
       </p>
 
       <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">

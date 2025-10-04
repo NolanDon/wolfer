@@ -1,6 +1,6 @@
 export default function SocialProof() {
   const quotes = [
-    ["“This flips ‘AI idea generators’ on their head — it actually finds real gaps.”", "Ex-PM, unicorn SaaS"],
+    ["“This flips ‘AI idea generators’ on their head, it actually finds real gaps.”", "Ex-PM, unicorn SaaS"],
     ["“The agents shipped assets I actually used. Not just drafts.”", "Bootstrapped founder"],
     ["“If this existed last year, I’d have saved months.”", "Growth lead, DTC"]
   ];
