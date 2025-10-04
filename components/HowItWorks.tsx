@@ -224,7 +224,7 @@ export default function HowItWorks() {
             <div className="rounded-2xl bg-black/40 ring-1 ring-white/10 px-5 py-4">
               <p className="text-sm text-sub">
                 With your subscription, you’ll also join a{" "}
-                <span className="font-semibold text-white">private community of startup founders</span>share wins,
+                <span className="font-semibold text-white">private community of startup founders</span> share wins,
                 compare playbooks, and get help so you’re never building alone.
               </p>
             </div>

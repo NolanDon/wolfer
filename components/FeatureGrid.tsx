@@ -9,7 +9,7 @@ export default function FeatureGrid() {
     ["Agent Mixer",
       "Choose the right set of AI agents (marketing, biz-dev, web) sized to your goal + budget."],
     ["Site Generator Hook",
-      "Generates a clean starter site + landing copy blocks, ready to deploy / iterate."],
+      "Generates a clean starter site + landing copy blocks, ready to deploy / iterate with an active web developer AI ready to make adjustments."],
     ["Ops Dashboard",
       "Daily tasks, progress, and strategy milestones. Export an n8n workflow on Pro."]
   ];
