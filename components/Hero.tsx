@@ -77,7 +77,7 @@ export default function Hero() {
             <p className="mt-5 text-sub max-w-xl">
               Not “AI ideas.” Real <strong>research + execution</strong>.
               We do deep research on winning products, spot painful gaps, and spin up a launchable MVP with agents for
-              marketing, biz-dev, and web. You confirm direction, we build.
+              marketing, biz-dev, and web. You confirm direction, we lay the foundation.
             </p>
             <div className="mt-8">
               <CTA compact />
