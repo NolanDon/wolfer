@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply bg-bg text-ink antialiased scroll-smooth;
+}
+
+::selection {
+  background: #6f57ff44;
+}
+
+.card {
+  @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-glow;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-medium text-white transition;
+  background: linear-gradient(135deg, #6f57ff, #00e0ff);
+  box-shadow: 0 8px 24px rgba(0, 224, 255, 0.25), 0 8px 24px rgba(111, 87, 255, 0.2);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium text-sub bg-white/10 hover:bg-white/15 transition;
+}
+
+/* Marquee animation (pauses on hover) */
+@keyframes marqueeX {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeXReverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marqueeX linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marqueeXReverse linear infinite;
+}
+
+/* Pause on hover, smoother perf */
+.group:hover .animate-marquee,
+.group:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+.balance { text-wrap: balance; }
+
