@@ -16,6 +16,7 @@ export default function CTA({ compact }: Props) {
   const [err, setErr] = useState<string | null>(null);
 
   const handleSubmit = async (e?: React.FormEvent) => {
+
     e?.preventDefault();
     setErr(null);
     const parsed = emailSchema.safeParse(email);
@@ -24,12 +25,14 @@ export default function CTA({ compact }: Props) {
       return;
     }
     try {
+      // inside handleSubmit
       setLoading(true);
-      await addDoc(collection(db, "waitlist"), {
-        email: parsed.data,
-        source: "landing",
-        createdAt: serverTimestamp()
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: parsed.data, source: "landing" }),
       });
+      if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
       setEmail("");
     } catch (e) {

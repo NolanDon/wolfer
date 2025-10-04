@@ -133,7 +133,7 @@ export default function HowItWorks() {
   const steps: [string, string][] = [
     [
       "Scrape & synthesize",
-      "We crawl reviews and public chatter to cluster pains, spot patterns, and surface real demand.",
+      "We crawl all data and public chatter to cluster pains, spot patterns, and surface real demand.",
     ],
     [
       "Validate & confirm",

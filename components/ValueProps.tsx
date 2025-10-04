@@ -14,7 +14,7 @@ const items: Item[] = [
   {
     title: "Real research, not generic AI",
     desc:
-      "We scrape reviews of large, successful products to surface validated pain points and overlooked niches.",
+      "We do deep research of large, successful products to surface validated pain points and overlooked niches.",
     img: "/images/research.webp",
     alt: "Holographic magnifying glass scanning review data",
   },
@@ -40,7 +40,7 @@ export default function ValueProps() {
 
       <h2 className="text-3xl md:text-4xl font-semibold">Why this approach works</h2>
       <p className="text-sub my-2 mb-5 max-w-2xl">
-        Most great SaaS starts with real pain, not guessing. We mine reviews to find proven gaps and spin up agents to build fast.
+        Most great SaaS starts with real pain, not guessing. We mine public company data to find proven gaps and spin up agents to build fast.
         It’s the same path behind <span className="font-semibold text-white">Slack</span>, <span className="font-semibold text-white">ConvertKit</span>, <span className="font-semibold text-white">UserVoice</span>, and <span className="font-semibold text-white">Markup Hero</span>.
       </p>
       {/* Conversion summary — darker treatment */}

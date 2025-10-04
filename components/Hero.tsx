@@ -69,14 +69,14 @@ export default function Hero() {
         <div className="py-20 md:py-28 grid lg:grid-cols-2 gap-10">
           {/* Copy / left column */}
           <div>
-            <p className="text-brand-200 mb-3">Wolfer</p>
+            <p className="text-brand-200 mb-3">WolferAI</p>
             <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
               Hello, we’re the <span className="text-brand-400">live agents</span> that
               <br /> construct your startup.
             </h1>
             <p className="mt-5 text-sub max-w-xl">
               Not “AI ideas.” Real <strong>research + execution</strong>.
-              We scrape reviews from winning products, spot painful gaps, and spin up a launchable MVP with agents for
+              We do deep research on winning products, spot painful gaps, and spin up a launchable MVP with agents for
               marketing, biz-dev, and web. You confirm direction, we build.
             </p>
             <div className="mt-8">
@@ -101,7 +101,7 @@ export default function Hero() {
                 <div className="mt-6 h-40 w-full rounded-lg bg-gradient-to-t from-brand-600/30 to-transparent relative overflow-hidden">
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-r from-brand-500/60 via-cyan-300/50 to-fuchsia-400/50 blur-2xl opacity-60" />
                   <div className="absolute left-4 top-4 text-xs text-sub">
-                    Research coverage: <span className="text-ink/90">2,000+ reviews parsed</span>
+                    Research coverage: <span className="text-ink/90">2,000+ data points parsed</span>
                   </div>
 
                   {/* Live idea ticker overlay (feels like app output) */}

@@ -1,7 +1,7 @@
 export default function FeatureGrid() {
   const items: [string, string][] = [
     ["Review Scraper & Analyzer",
-      "Crawls public reviews of market leaders. Clusters complaints and desires. Scores opportunity size."],
+      "Crawls public data of market leaders. Clusters complaints and desires. Scores opportunity size."],
     ["Idea → “Confirm or Tweak”",
       "You confirm the opportunity, refine target user, pick angle; we lock scope & next steps."],
     ["Domain Suggestions",
