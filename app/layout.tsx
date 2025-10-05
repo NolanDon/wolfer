@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Wolfer AI • Waitlist",
+  title: "Wolfer | Waitlist",
   description: "Live research + AI agents that build with you. Join the waitlist.",
   openGraph: {
-    title: "Modern AI • Waitlist",
+    title: "Wolfer | Waitlist",
     description: "Live research + AI agents that build with you.",
     images: ["/og-image.png"]
   },
