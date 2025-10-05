@@ -240,7 +240,6 @@ export async function POST(req: Request) {
         html,
         replyTo: "nolan@trywolfer.com",
         headers: {
-            // keep mailto for now; add a URL only if you implement it
             "List-Unsubscribe": "<mailto:hello@trywolfer.com?subject=unsubscribe>",
             "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
         },
