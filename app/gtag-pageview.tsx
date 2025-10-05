@@ -2,14 +2,15 @@
 'use client';
 
 import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function GtagPageView({ id }: { id: string }) {
     const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     useEffect(() => {
-        const url = pathname + (searchParams?.toString() ? `?${searchParams}` : '');
+        const search = typeof window !== 'undefined' ? window.location.search : '';
+        const url = `${pathname || ''}${search}`;
+
         if (typeof window !== 'undefined' && (window as any).gtag) {
             (window as any).gtag('event', 'page_view', {
                 page_path: url,
@@ -17,7 +18,7 @@ export default function GtagPageView({ id }: { id: string }) {
                 send_to: id,
             });
         }
-    }, [pathname, searchParams, id]);
+    }, [pathname, id]);
 
     return null;
 }

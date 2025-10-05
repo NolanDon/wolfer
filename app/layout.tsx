@@ -1,6 +1,6 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import GtagPageView from "./gtag-pageview";
 
@@ -40,8 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className="bg-bg bg-radial-spot">
-        {/* SPA page_view tracking */}
-        <GtagPageView id={GA_MEASUREMENT_ID} />
+        <Suspense fallback={null}>
+          <GtagPageView id={GA_MEASUREMENT_ID} />
+        </Suspense>
         {children}
       </body>
     </html>
