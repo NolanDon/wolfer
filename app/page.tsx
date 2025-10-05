@@ -22,7 +22,9 @@ export default function Page() {
       <FeatureGrid />
       <HowItWorks />
       <SocialProof />
-      <CTA />
+      <div className="px-6">
+        <CTA />
+      </div>
       <Footer />
     </main>
   );

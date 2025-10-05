@@ -36,7 +36,7 @@ const items: Item[] = [
 
 export default function ValueProps() {
   return (
-    <section id="benefits" className="mx-auto max-w-6xl px-4 py-10">
+    <section id="benefits" className="mx-auto max-w-6xl px-6 py-10">
 
       <h2 className="text-3xl md:text-4xl font-semibold">Why this approach works</h2>
       <p className="text-sub my-2 mb-5 max-w-2xl">

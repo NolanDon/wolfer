@@ -90,7 +90,7 @@ export default function Hero() {
             <div className="card p-4">
               <div className="rounded-xl border border-white/10 bg-black/20 p-6">
                 <div className="flex items-center justify-between">
-                  <span className="text-sub">Opportunity snapshot</span>
+                  <span className="text-sub">Opportunity Dashboard</span>
                   {/* Either just the icon + text */}
                   <span className="inline-flex items-center gap-2 text-brand-200 text-sm">
                     <LiveBadge size={8} />

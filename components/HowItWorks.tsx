@@ -150,11 +150,11 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="mx-auto max-w-6xl px-4 py-16">
+    <section id="how" className="mx-auto max-w-6xl px-10 py-16">
       <h2 className="text-3xl md:text-4xl font-semibold">How it works</h2>
       <p className="text-sub mt-3 max-w-3xl">
         You’re not doing this alone. After we validate your direction, we <strong>recommend the exact AI agents
-          to start with</strong> and <strong>automatically set them up</strong>connecting the right tools, calendars,
+          to start with</strong> and <strong>automatically set them up</strong> connecting the right tools, calendars,
         and data sources. From day one they ship work and report progress so you always know what’s next.
       </p>
 
