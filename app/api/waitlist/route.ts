@@ -65,19 +65,16 @@ export async function POST(req: Request) {
 
     // ---- Send welcome email (check {data,error}) ----
     const subject = "Welcome to Wolfer! You’re on the list 🐺";
-
+    // palette + links (optional but handy)
+    const site = process.env.NEXT_PUBLIC_SITE_URL || "https://trywolfer.com";
+    const slackLink = `${site}/community`;
     const text = [
         "You're in 🎉",
         "Thanks for joining the Wolfer waitlist.",
-        "We turn review data into validated opportunities and spin up agents from day one.",
-        "You’ll also get an invite to our private Slack community.",
-        "Reply with your focus area and we’ll prioritize it."
+        "We’ll auto-tailor your starter agent stack from your intake and, when your spot opens, connect your tools and begin executing day one.",
+        "You’ll also get an invite to our private Slack founder community.",
+        `${site}/community`
     ].join("\n\n");
-
-    // palette + links (optional but handy)
-    const site = process.env.NEXT_PUBLIC_SITE_URL || "https://trywolfer.com";
-    const slackLink = `${site}/slack`;         // update when ready
-    const replyMail = "mailto:nolan@trywolfer.com?subject=Wolfer%20focus";
 
     // === brand email ===
     const html = `
@@ -199,10 +196,11 @@ export async function POST(req: Request) {
 
                   <!-- bullets -->
                   <ul style="margin:18px 0 6px; padding-left:18px; color:#d6d8e5; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; line-height:1.7;">
-                    <li>We’ll recommend your starter agent stack (Marketing / Biz-Dev / Web).</li>
-                    <li>Invite to our private <strong style="color:#ffffff;">Slack founder community</strong>.</li>
-                    <li>Reply with your focus area—<a href="${replyMail}" style="color:#b9c0ff; text-decoration:none;">we’ll prioritize it</a>.</li>
-                  </ul>
+                    <li>We’ll <strong style="color:#fff;">auto-tailor your starter agent stack</strong> (Marketing / Biz-Dev / Web) from your intake.</li>
+                    <li>When your spot opens, we’ll <strong style="color:#fff;">connect your tools</strong> and start the first tasks day one.</li>
+                    <li>Get an invite to our private <strong style="color:#fff;">Slack founder community</strong> to share ideas and progress.</li>
+                    <li>Expect a dashboard preview with <strong style="color:#fff;">opportunity score</strong>, <strong style="color:#fff;">time-to-MVP</strong>, and first milestones.</li>
+                </ul>
 
                   <!-- CTA -->
                   <div style="padding-top:10px;">
