@@ -3,36 +3,52 @@ import { useEffect, useState } from "react";
 import CTA from "./CTA";
 import LivePulse, { LiveBadge } from "./LivePulse";
 
-/* ---------- mini ticker that loops ideas ---------- */
-function IdeaTicker() {
-  const ideas = [
-    { name: "Inbox rules + AI summaries for Shopify refunds", score: 86 },
-    { name: "Slack bot that flags churn risk from review tone", score: 82 },
-    { name: "Auto-build FAQ pages from 1★ review clusters", score: 79 },
-    { name: "Niche CRM for agencies tracking Reddit leads", score: 84 },
-    { name: "Chrome helper to rewrite listings by pain cluster", score: 81 },
-  ];
+/* ---------- types ---------- */
+type Idea = {
+  name: string;
+  score: number;            // opportunity score %
+  clusters: number;         // pain clusters detected
+  confidence: number;       // confidence %
+  mvpDays: number;          // time to MVP (days)
+  agentMix: string;         // recommended agents
+  domains: number;          // domain hits available
+  moat: "Low" | "Medium" | "Medium–High" | "High";
+};
 
+/* ---------- mini ticker that loops ideas & notifies parent ---------- */
+function IdeaTicker({
+  items,
+  onChange,
+  intervalMs = 3400,
+}: {
+  items: Pick<Idea, "name" | "score">[];
+  onChange: (index: number) => void;
+  intervalMs?: number;
+}) {
   const [i, setI] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // fade out → swap → fade in
-    const t = setInterval(() => {
+    const tick = setInterval(() => {
       setVisible(false);
-      const swap = setTimeout(() => {
-        setI((prev) => (prev + 1) % ideas.length);
+      const to = setTimeout(() => {
+        setI((prev) => {
+          const next = (prev + 1) % items.length;
+          onChange(next);
+          return next;
+        });
         setVisible(true);
-      }, 300); // out duration
-      return () => clearTimeout(swap);
-    }, 3400); // total per item
-    return () => clearInterval(t);
-  }, [ideas.length]);
+      }, 300);
+      return () => clearTimeout(to);
+    }, intervalMs);
+    return () => clearInterval(tick);
+  }, [items.length, intervalMs, onChange]);
 
-  // respect reduced motion
-  const prefersReduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-  const item = ideas[i];
+  const item = items[i];
 
   return (
     <div className="mt-4 rounded-lg border border-emerald-400/15 bg-emerald-300/5 px-3 py-3">
@@ -46,10 +62,14 @@ function IdeaTicker() {
 
       <div className="relative h-[48px] overflow-hidden">
         <div
-          key={item.name} // remount for smooth transition
+          key={item.name}
           className={`absolute inset-0 flex items-center justify-between gap-3 rounded-md bg-black/25 px-3 py-2 ring-1 ring-white/5
-            ${prefersReduced ? "" : visible ? "opacity-100 translate-y-0 transition-all duration-400 ease-out" : "opacity-0 translate-y-2 transition-all duration-300 ease-in"}
-          `}
+            ${prefersReduced
+              ? ""
+              : visible
+                ? "opacity-100 translate-y-0 transition-all duration-400 ease-out"
+                : "opacity-0 translate-y-2 transition-all duration-300 ease-in"
+            }`}
         >
           <p className="text-[13px] leading-tight text-white/90 line-clamp-2">{item.name}</p>
           <span className="shrink-0 rounded-md bg-emerald-500/15 px-2 py-1 text-[12px] font-semibold text-emerald-300 ring-1 ring-emerald-400/20">
@@ -63,6 +83,63 @@ function IdeaTicker() {
 
 /* ------------------------ Hero ------------------------ */
 export default function Hero() {
+  // single source of truth for ideas + metrics
+  const ideas: Idea[] = [
+    {
+      name: "Inbox rules + AI summaries for Shopify refunds",
+      score: 86,
+      clusters: 41,
+      confidence: 86,
+      mvpDays: 9,
+      agentMix: "SEO • Outreach • Web",
+      domains: 6,
+      moat: "Medium–High",
+    },
+    {
+      name: "Slack bot that flags churn risk from review tone",
+      score: 82,
+      clusters: 33,
+      confidence: 82,
+      mvpDays: 12,
+      agentMix: "Outreach • Web",
+      domains: 4,
+      moat: "Medium",
+    },
+    {
+      name: "Auto-build FAQ pages from 1★ review clusters",
+      score: 79,
+      clusters: 29,
+      confidence: 79,
+      mvpDays: 8,
+      agentMix: "SEO • Web",
+      domains: 5,
+      moat: "Medium–High",
+    },
+    {
+      name: "Niche CRM for agencies tracking Reddit leads",
+      score: 84,
+      clusters: 37,
+      confidence: 84,
+      mvpDays: 11,
+      agentMix: "Outreach • Web",
+      domains: 3,
+      moat: "Medium",
+    },
+    {
+      name: "Chrome helper to rewrite listings by pain cluster",
+      score: 81,
+      clusters: 35,
+      confidence: 81,
+      mvpDays: 7,
+      agentMix: "SEO • Web",
+      domains: 4,
+      moat: "High",
+    },
+  ];
+
+  const [idx, setIdx] = useState(0);
+  const current = ideas[idx];
+
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-4">
@@ -75,9 +152,9 @@ export default function Hero() {
               <br /> construct your startup.
             </h1>
             <p className="mt-5 text-sub max-w-xl">
-              Not “AI ideas.” Real <strong>research + execution</strong>.
-              We do deep research on winning products, spot painful gaps, and spin up a launchable MVP with agents for
-              marketing, biz-dev, and web. You confirm direction, we lay the foundation.
+              Not “AI ideas.” Real <strong>research + execution</strong>. We do deep research on winning
+              products, spot painful gaps, and spin up a launchable MVP with agents for marketing, biz-dev, and web.
+              You confirm direction, we lay the foundation.
             </p>
             <div className="mt-8">
               <CTA compact />
@@ -91,7 +168,6 @@ export default function Hero() {
               <div className="rounded-xl border border-white/10 bg-black/20 p-6">
                 <div className="flex items-center justify-between">
                   <span className="text-sub">Opportunity Dashboard</span>
-                  {/* Either just the icon + text */}
                   <span className="inline-flex items-center gap-2 text-brand-200 text-sm">
                     <LiveBadge size={8} />
                   </span>
@@ -104,25 +180,37 @@ export default function Hero() {
                     Research coverage: <span className="text-ink/90">2,000+ data points parsed</span>
                   </div>
 
-                  {/* Live idea ticker overlay (feels like app output) */}
+                  {/* Live idea ticker overlay */}
                   <div className="absolute inset-x-4 bottom-4">
-                    <IdeaTicker />
+                    <IdeaTicker
+                      items={ideas.map(({ name, score }) => ({ name, score }))}
+                      onChange={setIdx}
+                    />
                   </div>
                 </div>
 
-                {/* Model-aligned KPIs */}
+                {/* KPIs driven by current idea */}
                 <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                   <div className="card p-3">
                     <p className="text-xs text-sub">Pain points detected</p>
-                    <p className="text-lg font-medium">37 clusters</p>
+                    <p key={`clusters-${idx}`} className="text-lg font-medium transition-opacity duration-300">
+                      {current.clusters} clusters
+                    </p>
                   </div>
                   <div className="card p-3">
                     <p className="text-xs text-sub">Confidence score</p>
-                    <p className="text-lg font-medium text-emerald-300">82%</p>
+                    <p
+                      key={`conf-${idx}`}
+                      className="text-lg font-medium text-emerald-300 transition-opacity duration-300"
+                    >
+                      {current.confidence}%
+                    </p>
                   </div>
                   <div className="card p-3">
                     <p className="text-xs text-sub">Time to MVP</p>
-                    <p className="text-lg font-medium">~10 days</p>
+                    <p key={`mvp-${idx}`} className="text-lg font-medium transition-opacity duration-300">
+                      ~{current.mvpDays} days
+                    </p>
                   </div>
                 </div>
 
@@ -130,15 +218,21 @@ export default function Hero() {
                 <div className="mt-4 grid grid-cols-3 gap-4 text-center">
                   <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
                     <p className="text-[11px] text-sub">Agent mix</p>
-                    <p className="text-sm">SEO • Outreach • Web</p>
+                    <p key={`mix-${idx}`} className="text-sm transition-opacity duration-300">
+                      {current.agentMix}
+                    </p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
                     <p className="text-[11px] text-sub">Domain hits</p>
-                    <p className="text-sm">5 available</p>
+                    <p key={`domains-${idx}`} className="text-sm transition-opacity duration-300">
+                      {current.domains} available
+                    </p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
                     <p className="text-[11px] text-sub">Moat signal</p>
-                    <p className="text-sm">Medium–High</p>
+                    <p key={`moat-${idx}`} className="text-sm transition-opacity duration-300">
+                      {current.moat}
+                    </p>
                   </div>
                 </div>
               </div>
