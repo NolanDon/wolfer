@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     }
 
     // ---- Send welcome email (check {data,error}) ----
-    const subject = "Welcome to Wolfer — You’re on the list 🐺";
+    const subject = "Welcome to Wolfer! You’re on the list 🐺";
 
     const text = [
         "You're in 🎉",
@@ -74,22 +74,162 @@ export async function POST(req: Request) {
         "Reply with your focus area and we’ll prioritize it."
     ].join("\n\n");
 
+    // palette + links (optional but handy)
+    const site = process.env.NEXT_PUBLIC_SITE_URL || "https://trywolfer.com";
+    const slackLink = `${site}/slack`;         // update when ready
+    const replyMail = "mailto:nolan@trywolfer.com?subject=Wolfer%20focus";
+
+    // === brand email ===
     const html = `
-    <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e5e7eb;background:#0b0b12;padding:24px">
-      <div style="max-width:560px;margin:0 auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px">
-        <h1 style="margin:0 0 8px;color:#fff;font-size:20px;line-height:1.2">You're in 🎉</h1>
-        <p style="margin:0 0 12px">Thanks for joining the Wolfer waitlist.</p>
-        <p style="margin:0 0 12px">We turn real review data into validated opportunities and spin up agents to execute from day one.</p>
-        <ul style="margin:12px 0 16px;padding-left:18px">
-          <li>Research coverage of your space</li>
-          <li>Recommended agent stack (Marketing / Biz-Dev / Web)</li>
-          <li>Invite to our private <strong>Slack founder community</strong></li>
-        </ul>
-        <p style="margin:0 0 16px">Reply with your focus area and we’ll prioritize it.</p>
-        <p style="margin:0;font-size:12px;color:#9ca3af">If this wasn’t you, you can ignore this email.</p>
-      </div>
-    </div>
-  `;
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+  You're in! Here’s what happens next (invite + KPIs inside).
+</div>
+
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#0b0b12;">
+  <tr>
+    <td align="center" style="padding:28px 16px;">
+      <!-- container -->
+      <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="width:600px; max-width:600px;">
+        <!-- header -->
+        <tr>
+          <td style="padding:0 0 12px;">
+            <table role="presentation" width="100%">
+              <tr>
+                <td style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#c7c9d1; font-size:12px;">
+                  WolferAI
+                </td>
+                <td align="right" style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#b4b7ff; font-size:12px;">
+                  <span style="display:inline-block; vertical-align:middle; height:8px; width:8px; background:#34d399; border-radius:50%; box-shadow:0 0 0 4px rgba(52,211,153,.18); margin-right:6px;"></span>
+                  Live
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- gradient border card -->
+        <tr>
+          <td style="background:linear-gradient(135deg, rgba(124,108,244,.35), rgba(103,232,249,.25)); padding:1px; border-radius:16px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px;">
+              <tr>
+                <td style="padding:24px; border-radius:16px;">
+                  
+                  <!-- title -->
+                  <h1 style="margin:0 0 8px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:28px; line-height:1.2; color:#ffffff;">
+                    You're in 🎉
+                  </h1>
+                  <p style="margin:0 0 16px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#e5e7eb; font-size:15px; line-height:1.6;">
+                    Thanks for joining the Wolfer waitlist. We do <strong style="color:#ffffff;">research + execution</strong>:
+                    we mine review data, surface validated gaps, then spin up agents that start working on day one.
+                  </p>
+
+                  <!-- "Opportunity Dashboard" look -->
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06); border-radius:12px;">
+                    <tr>
+                      <td style="padding:16px 16px 8px;">
+                        <p style="margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a3a7b7; font-size:12px;">
+                          Research coverage: <span style="color:#d1d5db;">2,000+ data points parsed</span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:0 16px 16px;">
+                        <!-- idea pill -->
+                        <table role="presentation" width="100%" style="background:linear-gradient(180deg, rgba(124,108,244,.22), rgba(103,232,249,.15)); border:1px solid rgba(255,255,255,0.06); border-radius:10px;">
+                          <tr>
+                            <td style="padding:10px 12px;">
+                              <table role="presentation" width="100%">
+                                <tr>
+                                  <td style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#b9c0ff; font-size:11px;">
+                                    <span style="display:inline-block; height:8px; width:8px; border-radius:50%; background:#34d399; margin-right:6px;"></span>
+                                    New ideas detected
+                                  </td>
+                                  <td align="right">
+                                    <span style="display:inline-block; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a7f3d0; font-weight:600; font-size:12px; background:rgba(52,211,153,.15); border:1px solid rgba(52,211,153,.25); padding:4px 8px; border-radius:8px;">
+                                      82%
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2" style="padding-top:8px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#e6e8f7; font-size:13px;">
+                                    Slack bot that flags churn risk from review tone
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <!-- KPIs -->
+                    <tr>
+                      <td style="padding:8px 16px 16px;">
+                        <table role="presentation" width="100%">
+                          <tr>
+                            <td width="33.33%" style="padding:6px;">
+                              <table role="presentation" width="100%" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:12px;">
+                                <tr><td align="center" style="padding:10px;">
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a3a7b7; font-size:11px;">Pain points detected</div>
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#ffffff; font-size:18px; font-weight:600;">33 clusters</div>
+                                </td></tr>
+                              </table>
+                            </td>
+                            <td width="33.33%" style="padding:6px;">
+                              <table role="presentation" width="100%" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:12px;">
+                                <tr><td align="center" style="padding:10px;">
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a3a7b7; font-size:11px;">Confidence score</div>
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a7f3d0; font-size:18px; font-weight:600;">82%</div>
+                                </td></tr>
+                              </table>
+                            </td>
+                            <td width="33.33%" style="padding:6px;">
+                              <table role="presentation" width="100%" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:12px;">
+                                <tr><td align="center" style="padding:10px;">
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#a3a7b7; font-size:11px;">Time to MVP</div>
+                                  <div style="font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#ffffff; font-size:18px; font-weight:600;">~12 days</div>
+                                </td></tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- bullets -->
+                  <ul style="margin:18px 0 6px; padding-left:18px; color:#d6d8e5; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; line-height:1.7;">
+                    <li>We’ll recommend your starter agent stack (Marketing / Biz-Dev / Web).</li>
+                    <li>Invite to our private <strong style="color:#ffffff;">Slack founder community</strong>.</li>
+                    <li>Reply with your focus area—<a href="${replyMail}" style="color:#b9c0ff; text-decoration:none;">we’ll prioritize it</a>.</li>
+                  </ul>
+
+                  <!-- CTA -->
+                  <div style="padding-top:10px;">
+                    <a href="${slackLink}"
+                       style="background:#7c6cf4; color:#ffffff; text-decoration:none; display:inline-block; padding:12px 18px; border-radius:12px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; border:1px solid rgba(255,255,255,0.12);">
+                      Join the Slack community →
+                    </a>
+                  </div>
+
+                  <!-- footer -->
+                  <p style="margin:18px 0 0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#9ca3af; font-size:12px;">
+                    If this wasn’t you, you can ignore this email.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="height:16px;"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+`;
 
     let emailed = false;
     let messageId: string | undefined;
