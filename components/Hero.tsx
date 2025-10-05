@@ -142,7 +142,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-7xl px-4">
         <div className="py-20 md:py-28 grid lg:grid-cols-2 gap-10">
           {/* Copy / left column */}
           <div>
