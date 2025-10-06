@@ -1,8 +1,8 @@
 export default function SocialProof() {
   const quotes = [
-    ["“This flips ‘AI idea generators’ on their head, it actually finds real gaps.”", "Ex-PM, unicorn SaaS"],
-    ["“The agents shipped assets I actually used. Not just drafts.”", "Bootstrapped founder"],
-    ["“If this existed last year, I’d have saved months.”", "Growth lead, DTC"]
+    ["“This feels way closer to how real founders think about ideas.”", "Ex-PM, unicorn SaaS"],
+    ["“Can’t wait to see if it actually builds out the startup steps.”", "Bootstrapped founder"],
+    ["“I’ve spent months validating bad ideas—hoping this saves me from that.”", "Growth lead, DTC"]
   ];
 
   return (
