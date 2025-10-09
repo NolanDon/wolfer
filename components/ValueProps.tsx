@@ -87,7 +87,7 @@ export default function ValueProps() {
 
             <div className="relative mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
               <Link
-                href="/waitlist"
+                href="#waitlist"
                 className="inline-flex items-center justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-400 shadow-lg shadow-black/40"
               >
                 Join the Waitlist
