@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import CTA from "./CTA";
 
 type Item = {
   title: string;
@@ -86,14 +87,11 @@ export default function ValueProps() {
             </ul>
 
             <div className="relative mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
-              <Link
-                href="#waitlist"
-                className="inline-flex items-center justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-400 shadow-lg shadow-black/40"
-              >
-                Join the Waitlist
-              </Link>
-              <span className="text-xs text-sub">Early access spots this month are limited.</span>
+              <div className="align-left mb-2">
+                <CTA />
+              </div>
             </div>
+            <span className="text-xs text-sub">Early access spots this month are limited.</span>
           </div>
         </div>
       </div>
